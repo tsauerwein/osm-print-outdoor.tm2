@@ -296,3 +296,14 @@
     text-halo-radius: 1.5;
   }
 }
+
+// ---------------------------------------------------------------------
+// Terrain 
+#contour {
+  text-face-name: @sans;
+  text-size: @textSizeFactor*7;
+  text-name: '';
+  [index=10] {
+    text-name: [ele] + ' m';
+  }
+}
