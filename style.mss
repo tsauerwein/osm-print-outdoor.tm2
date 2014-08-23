@@ -8,11 +8,17 @@
 // also in the #water_label and #waterway_label layers inside a color
 // manipulation function to get a darker shade of the same hue.
 @land: #f8f4f0;
-@water: #a0c8f0;
+@water: #1037A3;
 
 Map {
   background-color:@land;
 }
+
+// Scale factor for the text size to easily adjust all labels.
+@textSizeFactor: 2;
+
+@lineWidthFactor: 2;
+@iconScaleFactor: 2;
 
 // ---------------------------------------------------------------------
 // Political boundaries
@@ -27,19 +33,19 @@ Map {
   }
   // Countries
   [admin_level=2] {
-    line-width: 1.4;
+    line-width: @lineWidthFactor*1.4;
     line-cap: round;
-    [zoom>=6] { line-width: 2; }
-    [zoom>=8] { line-width: 4; }
+    [zoom>=6] { line-width: @lineWidthFactor*2; }
+    [zoom>=8] { line-width: @lineWidthFactor*4; }
     [disputed=1] { line-dasharray: 4,4; }
   }
   // States / Provices / Subregions
   [admin_level>=3] {
-    line-width: 0.4;
+    line-width: @lineWidthFactor*0.4;
     line-dasharray: 10,3,3,3;
-    [zoom>=6] { line-width: 1; }
-    [zoom>=8] { line-width: 1.5; }
-    [zoom>=12] { line-width: 2; }
+    [zoom>=6] { line-width: @lineWidthFactor*1; }
+    [zoom>=8] { line-width: @lineWidthFactor*1.5; }
+    [zoom>=12] { line-width: @lineWidthFactor*2; }
   }
 }
 
@@ -72,17 +78,17 @@ Map {
 #waterway {
   line-color: @water * 0.9;
   line-cap: round;
-  line-width: 0.5;
+  line-width: @lineWidthFactor*0.5;
   [type='river'] {
-    [zoom>=12] { line-width: 1; }
-    [zoom>=14] { line-width: 2; }
-    [zoom>=16] { line-width: 3; }
+    [zoom>=12] { line-width: @lineWidthFactor*1; }
+    [zoom>=14] { line-width: @lineWidthFactor*2; }
+    [zoom>=16] { line-width: @lineWidthFactor*3; }
   }
   [type='stream'],
   [type='canal'] {
-    [zoom>=14] { line-width: 1; }
-    [zoom>=16] { line-width: 2; }
-    [zoom>=18] { line-width: 3; }
+    [zoom>=14] { line-width: @lineWidthFactor*1; }
+    [zoom>=16] { line-width: @lineWidthFactor*2; }
+    [zoom>=18] { line-width: @lineWidthFactor*3; }
   }
 }
 
@@ -90,13 +96,13 @@ Map {
 // Terrain
 
 #contour {
-  line-width: 1;
-  line-color: #E8E4D5;
+  line-width: @lineWidthFactor*1;
+  line-color: #C9C4B3;
   [index=5] { 
-    line-color: #D9D2BA;
+    line-color: #ABA695;
   }
   [index=10] { 
-    line-color: #C9C4B3;
+    line-color: #918C7C;
   }
 }
 
@@ -136,7 +142,7 @@ Map {
   polygon-fill: darken(@land, 5%);
   polygon-geometry-transform:translate(-1,-1.5);
   polygon-clip:false;  
-  line-width: 0.5;
+  line-width: @lineWidthFactor*0.5;
   line-color: mix(@land, #000, 85);
   line-geometry-transform:translate(-1,-1.5);
   line-clip:false;
@@ -149,10 +155,10 @@ Map {
 #aeroway [zoom>=12] {
   ['mapnik::geometry_type'=2] {
     line-color: @land * 0.96;
-    [type='runway'] { line-width: 5; }    
+    [type='runway'] { line-width: @lineWidthFactor*5; }    
     [type='taxiway'] {  
-      line-width: 1;
-      [zoom>=15] { line-width: 2; }
+      line-width: @lineWidthFactor*1;
+      [zoom>=15] { line-width: @lineWidthFactor*2; }
     }
   }    
   ['mapnik::geometry_type'=3] {

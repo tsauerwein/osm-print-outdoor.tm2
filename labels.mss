@@ -16,8 +16,6 @@
 // - German: '[name_de]'
 @name: '[name]';  
 
-// Scale factor for the text size to easily adjust all labels.
-@textSizeFactor: 2;
 
 
 // ---------------------------------------------------------------------
@@ -148,7 +146,7 @@
     [ldir='SE'] { text-dx: 4; text-dy: 4; }
     [ldir='SW'] { text-dx: -4; text-dy: 4; }
     [ldir='NW'] { text-dx: -4; text-dy: -4; }
-    marker-width: 4;
+    marker-width: @iconScaleFactor*4;
     marker-fill: #333;
   }
 }
@@ -223,6 +221,8 @@
     // to those that do. See also <https://www.mapbox.com/maki/>
     marker-fill:#666;
     marker-file:url('icon/[maki]-12.svg');
+    marker-width: @iconScaleFactor*10;
+    marker-height: @iconScaleFactor*10;
   }
   ::label {
     text-name: @name;
@@ -301,9 +301,9 @@
 // Terrain 
 #contour {
   text-face-name: @sans;
-  text-size: @textSizeFactor*7;
+  text-size: @textSizeFactor*6;
   text-name: '';
-  [index=10] {
+  [index=10][ele > 0] {
     text-name: [ele] + ' m';
   }
 }
